@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "DEVDAYTalks.Cloud", "DEVDAYTalks.Cloud\DEVDAYTalks.Cloud.ccproj", "{AA3539DC-81E0-48D6-840F-D3A7BDD97C3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEVDAYTalks.Web", "DEVDAYTalks.Web\DEVDAYTalks.Web.csproj", "{3B9F51D7-024E-4EB6-AE99-6020D7BEE65D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA3539DC-81E0-48D6-840F-D3A7BDD97C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3539DC-81E0-48D6-840F-D3A7BDD97C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3539DC-81E0-48D6-840F-D3A7BDD97C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3539DC-81E0-48D6-840F-D3A7BDD97C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9F51D7-024E-4EB6-AE99-6020D7BEE65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9F51D7-024E-4EB6-AE99-6020D7BEE65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9F51D7-024E-4EB6-AE99-6020D7BEE65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9F51D7-024E-4EB6-AE99-6020D7BEE65D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

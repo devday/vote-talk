@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="panel-group" id="accordion" data-bind="foreach: startingTimes">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-bind="attr: { href: '#collapse' + ID() }">
+                    <span data-bind="text: Value"></span>
+                </a>
+            </h4>
+        </div>
+        <div data-bind="attr: { id: 'collapse' + ID() }" class="panel-collapse collapse">
+            <div class="panel-body" data-bind="foreach: $parent.talksByStartingTime($data.Value())">
+                <div class="talk">
+                    <h5 data-bind="text: getTitle()"></h5>
+                    <h5 data-bind="text: getHeader()"></h5>
+                    <button class="btn btn-xs btn-info toggle-button" data-bind="text: toggleDescriptionText(), click: function () { toggleDescription(); }">
+                    </button>
+                    <br />
+                    <div data-bind="visible: DescriptionVisible()">
+                        <p data-bind="text: Description()"></p>
+                    </div>
+                    <span class="rating">
+                        <input type="radio" class="rating-input" data-bind="click: function () { setVote(5); $parentContext.$parent.confirmButtonVisible(true); return true; }, attr: { id: getNumber() + '-5', 'for': getNumber() + '-5', name: getNumber() }">
+                        <label data-bind="attr: { 'for': getNumber() + '-5' }" class="rating-star"></label>
+
+                        <input type="radio" class="rating-input" data-bind="click: function () { setVote(4); $parentContext.$parent.confirmButtonVisible(true); return true; }, attr: { id: getNumber() + '-4', 'for': getNumber() + '-4', name: getNumber() }">
+                        <label data-bind="attr: { 'for': getNumber() + '-4' }" class="rating-star"></label>
+
+                        <input type="radio" class="rating-input" data-bind="click: function () { setVote(3); $parentContext.$parent.confirmButtonVisible(true); return true; }, attr: { id: getNumber() + '-3', 'for': getNumber() + '-3', name: getNumber() }">
+                        <label data-bind="attr: { 'for': getNumber() + '-3' }" class="rating-star"></label>
+
+                        <input type="radio" class="rating-input" data-bind="click: function () { setVote(2); $parentContext.$parent.confirmButtonVisible(true); return true; }, attr: { id: getNumber() + '-2', 'for': getNumber() + '-2', name: getNumber() }">
+                        <label data-bind="attr: { 'for': getNumber() + '-2' }" class="rating-star"></label>
+
+                        <input type="radio" class="rating-input" data-bind="click: function () { setVote(1); $parentContext.$parent.confirmButtonVisible(true); return true; }, attr: { id: getNumber() + '-1', 'for': getNumber() + '-1', name: getNumber() }">
+                        <label data-bind="attr: { 'for': getNumber() + '-1' }" class="rating-star"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-lg btn-success" data-bind="visible: confirmButtonVisible, enable: confirmButtonEnable, click: sendVotes" id="confirm">Confirmar</button>
+<div id="logo">
+    <a href="http://devday.devisland.com" target="_blank">
+        <img id="devday-logo" src="~/Content/images/devday2013.png" height="32" alt="devday" /></a>
+    <img id="devisland-logo" src="~/Content/images/devisland.png" height="32" alt="devday" />
+</div>
+@section scripts
+{
+    <script src="/Scripts/views/talk/index.js"></script>
+}

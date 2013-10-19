@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DEVDAYTalks.Web.Models.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DEVDAYTalksWebModelsStoreContainer">
+          <EntitySet Name="Talks" EntityType="DEVDAYTalks.Web.Models.Store.Talks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Votes" EntityType="DEVDAYTalks.Web.Models.Store.Votes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Votes_Talk" Association="DEVDAYTalks.Web.Models.Store.FK_Votes_Talk">
+            <End Role="Talks" EntitySet="Talks" />
+            <End Role="Votes" EntitySet="Votes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Talks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Speaker" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StartingAt" Type="time" Nullable="false" />
+          <Property Name="DurationInMin" Type="int" Nullable="false" />
+          <Property Name="Room" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Votes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TalkID" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" />
+        </EntityType>
+        <Association Name="FK_Votes_Talk">
+          <End Role="Talks" Type="DEVDAYTalks.Web.Models.Store.Talks" Multiplicity="1" />
+          <End Role="Votes" Type="DEVDAYTalks.Web.Models.Store.Votes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Talks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Votes">
+              <PropertyRef Name="TalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DEVDAYTalks.Web.Models" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DEVDAY2013Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Talks" EntityType="DEVDAYTalks.Web.Models.Talk" />
+          <EntitySet Name="Votes" EntityType="DEVDAYTalks.Web.Models.Vote" />
+          <AssociationSet Name="FK_Votes_Talk" Association="DEVDAYTalks.Web.Models.FK_Votes_Talk">
+            <End Role="Talk" EntitySet="Talks" />
+            <End Role="Vote" EntitySet="Votes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Talk">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Speaker" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Time" Name="StartingAt" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="DurationInMin" Nullable="false" />
+          <Property Type="String" Name="Room" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Votes" Relationship="DEVDAYTalks.Web.Models.FK_Votes_Talk" FromRole="Talk" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TalkID" Nullable="false" />
+          <Property Type="Int32" Name="Score" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Precision="7" />
+          <NavigationProperty Name="Talk" Relationship="DEVDAYTalks.Web.Models.FK_Votes_Talk" FromRole="Vote" ToRole="Talk" />
+        </EntityType>
+        <Association Name="FK_Votes_Talk">
+          <End Type="DEVDAYTalks.Web.Models.Talk" Role="Talk" Multiplicity="1" />
+          <End Type="DEVDAYTalks.Web.Models.Vote" Role="Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Talk">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="TalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DEVDAYTalksWebModelsStoreContainer" CdmEntityContainer="DEVDAY2013Entities">
+          <EntitySetMapping Name="Talks">
+            <EntityTypeMapping TypeName="DEVDAYTalks.Web.Models.Talk">
+              <MappingFragment StoreEntitySet="Talks">
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="DurationInMin" ColumnName="DurationInMin" />
+                <ScalarProperty Name="StartingAt" ColumnName="StartingAt" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Speaker" ColumnName="Speaker" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Votes">
+            <EntityTypeMapping TypeName="DEVDAYTalks.Web.Models.Vote">
+              <MappingFragment StoreEntitySet="Votes">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="TalkID" ColumnName="TalkID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
